@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+         body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f9;
+    }
+    
+    .form-container {
+        background: white;
+        padding: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        width: 300px;
+    }
+    
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+    
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    
+    small {
+        color: red;
+        font-size: 12px;
+        display: block;
+        margin-top: 5px;
+    }
+    
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #5c6bc0;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #3f51b5;
+    }
+    </style>
+    
+     
+   
+ 
+
+</head>
+<body>
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+                <small id="emailError"></small>
+            </div>
+            
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <small id="usernameError"></small>
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <small id="passwordError"></small>
+            </div>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent form submission
+    
+        // Clear previous error messages
+        document.getElementById('emailError').innerText = '';
+        document.getElementById('usernameError').innerText = '';
+        document.getElementById('passwordError').innerText = '';
+    
+        // Get values
+        const email = document.getElementById('email').value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+    
+        let isValid = true;
+    
+        // Validate email using regex
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailRegex.test(email)) {
+            document.getElementById('emailError').innerText = 'Please enter a valid email address.';
+            isValid = false;
+        }
+    
+        // Validate username (only alphanumeric characters, min 3 characters)
+        const usernameRegex = /^[a-zA-Z0-9]{3,}$/;
+        if (!usernameRegex.test(username)) {
+            document.getElementById('usernameError').innerText = 'Username must be at least 3 characters long and alphanumeric.';
+            isValid = false;
+        }
+    
+        // Validate password (at least 8 characters, 1 number, 1 uppercase, 1 special character)
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            document.getElementById('passwordError').innerText = 'Password must be at least 8 characters long, contain a number, an uppercase letter, and a special character.';
+            isValid = false;
+        }
+    
+        // If all fields are valid, submit the form 
+         if (isValid) { 
+             alert('Form submitted successfully!'); 
+            //  You can submit the form or reset the fields here. 
+        }
+     });  
+</script>
+    
+
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
